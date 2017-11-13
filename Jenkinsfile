@@ -2,10 +2,16 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        stage('Fail Build') {
             steps {
                 echo 'Building..'
-                sh './importantCode.sh'
+                sh './brokenCode.sh'
+            }
+        }
+        stage('Success Build') {
+            steps {
+                echo 'Building..'
+                sh './workingCode.sh'
             }
         }
         stage('Test') {
