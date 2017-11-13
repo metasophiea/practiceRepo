@@ -12,7 +12,8 @@ pipeline {
         stage('Fail Compile') {
           steps {
             echo 'Attempting to compile "brokenCPP.cpp"'
-            sh 'g++ brokenCPP.cpp'
+            sh '''g++ brokenCPP.cpp || true
+# Force progression'''
           }
         }
         stage('Success Build Script') {
@@ -30,8 +31,20 @@ pipeline {
       }
     }
     stage('Test') {
-      steps {
-        echo 'Testing..'
+      parallel {
+        stage('Test') {
+          steps {
+            echo 'Testing..'
+          }
+        }
+        stage('Python Functions Test') {
+          steps {
+            echo 'Testing Python Functions'
+            sh '''echo $(pwd)
+echo $(ls)
+python3 ./python/functionsTester.py'''
+          }
+        }
       }
     }
     stage('Deploy') {
