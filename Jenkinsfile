@@ -11,7 +11,7 @@ pipeline {
         stage('Fail Compile') {
             steps {
                 echo 'Compiling..'
-                sh 'g++ brokenCPP.cpp'
+                // sh 'g++ brokenCPP.cpp'
             }
         }
         stage('Success Build') {
