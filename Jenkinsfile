@@ -41,6 +41,7 @@ pipeline {
           steps {
             echo 'Testing Python Functions'
             sh '''echo $(pwd)
+echo $(ls)
 python3 ./python/functionsTester.py'''
           }
         }
