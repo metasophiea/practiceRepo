@@ -31,8 +31,18 @@ pipeline {
       }
     }
     stage('Test') {
-      steps {
-        echo 'Testing..'
+      parallel {
+        stage('Test') {
+          steps {
+            echo 'Testing..'
+          }
+        }
+        stage('') {
+          steps {
+            echo 'Testing Python Functions'
+            sh 'python3 ./python/functionsTester.py'
+          }
+        }
       }
     }
     stage('Deploy') {
