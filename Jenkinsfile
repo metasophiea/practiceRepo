@@ -1,28 +1,30 @@
 pipeline {
   agent any
   stages {
-    stage('Fail Build') {
-      steps {
-        echo 'Building..'
-        sh './brokenCode.sh'
-      }
-    }
-    stage('Fail Compile') {
-      steps {
-        echo 'Compiling..'
-      }
-    }
-    stage('Success Build') {
+    stage('Stage 1 Builds') {
       parallel {
-        stage('Success Build') {
+        stage('Fail Build Script') {
           steps {
-            echo 'Building..'
+            echo 'Running the unsuccessful build script'
+            sh './brokenCode.sh'
+          }
+        }
+        stage('Fail Compile') {
+          steps {
+            echo 'Attempting to compile "brokenCPP.cpp"'
+            sh 'g++ brokenCPP.cpp'
+          }
+        }
+        stage('Success Build Script') {
+          steps {
+            echo 'Running the successful build script'
             sh './workingCode.sh'
           }
         }
         stage('') {
           steps {
-            echo 'Look at this'
+            echo 'Attempting to compile "workingCPP.cpp"'
+            sh 'g++ workingCPP.cpp'
           }
         }
       }
