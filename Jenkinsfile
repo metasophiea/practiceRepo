@@ -37,10 +37,11 @@ pipeline {
             echo 'Testing..'
           }
         }
-        stage('') {
+        stage('Python Functions Test') {
           steps {
             echo 'Testing Python Functions'
-            sh 'python3 ./python/functionsTester.py'
+            sh '''echo $(pwd)
+python3 ./python/functionsTester.py'''
           }
         }
       }
