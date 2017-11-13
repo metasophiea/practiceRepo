@@ -8,6 +8,12 @@ pipeline {
                 sh './brokenCode.sh'
             }
         }
+        stage('Fail Compile') {
+            steps {
+                echo 'Compiling..'
+                sh 'g++ brokenCPP.cpp'
+            }
+        }
         stage('Success Build') {
             steps {
                 echo 'Building..'
