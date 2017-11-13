@@ -21,7 +21,7 @@ pipeline {
             sh './workingCode.sh'
           }
         }
-        stage('') {
+        stage('Success Compile') {
           steps {
             echo 'Attempting to compile "workingCPP.cpp"'
             sh 'g++ workingCPP.cpp'
