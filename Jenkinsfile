@@ -12,7 +12,8 @@ pipeline {
         stage('Fail Compile') {
           steps {
             echo 'Attempting to compile "brokenCPP.cpp"'
-            sh 'g++ brokenCPP.cpp'
+            sh '''g++ brokenCPP.cpp || true
+# Force progression'''
           }
         }
         stage('Success Build Script') {
